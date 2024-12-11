@@ -6,7 +6,7 @@ namespace MetaExchange.Core.Services;
 
 public class SellService(IExchangeAggregatorService bitsExchangeAggregatorService) : BaseOrderExecutionService, ISellService
 {
-    private readonly IBitsExchangeAggregatorService _bitsExchangeAggregatorService = bitsExchangeAggregatorService.NotNull();
+    private readonly IBitsExchangeAggregatorService _bitsExchangeAggregatorService = bitsExchangeAggregatorService.NotNull(nameof(bitsExchangeAggregatorService));
 
     public List<OrderExecutionResult> GetExecuteOrders(decimal amount, List<Exchange> exchanges)
     {

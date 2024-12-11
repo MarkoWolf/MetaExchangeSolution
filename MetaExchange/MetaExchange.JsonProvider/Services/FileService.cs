@@ -11,12 +11,12 @@ namespace MetaExchange.JsonProvider.Services;
 
 public class FileService(IOptions<JsonProviderOptions> options) : IReadOnlyFileService
 {
-    private readonly JsonProviderOptions _options = options.NotNull().Value;
+    private readonly JsonProviderOptions _options = options.NotNull(nameof(options)).Value;
     private readonly string _searchPattern = "*.json";
 
     public List<T> ReadAllFromFolder<T>()
     {
-        var folderPath = _options.FilePath;
+        var folderPath =  Path.Combine(AppContext.BaseDirectory, _options.FilePath);
         if (string.IsNullOrWhiteSpace(folderPath))
         {
             return [];

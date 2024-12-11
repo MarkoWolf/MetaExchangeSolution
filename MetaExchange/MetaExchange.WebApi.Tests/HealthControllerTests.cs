@@ -1,18 +1,12 @@
 ﻿using System.Net;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http;
 
 namespace MetaExchange.WebApi.Tests;
 
-public class HealthControllerTests : IClassFixture<MetaExchangeWebApiFactory>
+public class HealthControllerTests(MetaExchangeWebApiFactory factory) : IClassFixture<MetaExchangeWebApiFactory>
 {
-    private readonly HttpClient _httpClient;
+    private readonly HttpClient _httpClient = factory.CreateClient();
 
-    public HealthControllerTests(MetaExchangeWebApiFactory factory)
-    {
-       _httpClient = factory.CreateClient();
-    }
-    
     [Fact]
     public async Task GetHealth_Should_return_200_OK()
     {
@@ -27,4 +21,6 @@ public class HealthControllerTests : IClassFixture<MetaExchangeWebApiFactory>
         // Assert 
         response.StatusCode.Should().Be(expecteStatusCode);
     }
+ 
+
 }

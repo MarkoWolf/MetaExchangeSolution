@@ -147,15 +147,3 @@ public class App
         }
     }
 }
-
-public enum OrderType
-{
-    Buy,
-    Sell
-}
-
-public enum Decision
-{
-    Yes,
-    No
-}

@@ -7,7 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="SharpGrip.FluentValidation.AutoValidation.Mvc" Version="1.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MetaExchange.Application\MetaExchange.Application.csproj" />
+    <ProjectReference Include="..\MetaExchange.Core\MetaExchange.Core.csproj" />
+    <ProjectReference Include="..\MetaExchange.Dependencies\MetaExchange.Dependencies.csproj" />
   </ItemGroup>
 
 </Project>

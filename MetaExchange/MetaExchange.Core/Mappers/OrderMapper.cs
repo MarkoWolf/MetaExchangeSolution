@@ -1,10 +1,10 @@
 ﻿using MetaExchange.Core.Models;
 
-namespace MetaExchange.Core.Extensions;
+namespace MetaExchange.Core.Mappers;
 
 public static class OrderMapper
 {
-    public static AggregatedOrder MapOrderToAggregatedOrder(this Order order)
+    public static AggregatedOrder Map(this Order order)
     {
         return new AggregatedOrder
         {

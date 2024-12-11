@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using MetaExchange.Core.Models;
-using MetaExchange.JsonProvider.Extentsions;
+using MetaExchange.JsonProvider.Mappers;
 using MetaExchange.JsonProvider.Models;
 
 namespace MetaExchange.JsonProvider.Tests;
@@ -58,7 +58,7 @@ public class JsonToDomainMapperTests
         };
 
         // Act
-        var result = jsonExchange.MapToDomain();
+        var result = jsonExchange.Map();
 
         // Assert
         result.Should().NotBeNull();
@@ -90,7 +90,7 @@ public class JsonToDomainMapperTests
         };
 
         // Act
-        var result = jsonExchange.MapToDomain();
+        var result = jsonExchange.Map();
 
         // Assert
         result.Should().NotBeNull();
@@ -108,7 +108,7 @@ public class JsonToDomainMapperTests
         JsonExchange jsonExchange = null;
 
         // Act
-        Exchange result = jsonExchange.MapToDomain();
+        Exchange result = jsonExchange.Map();
 
         // Assert
         result.Should().NotBeNull();

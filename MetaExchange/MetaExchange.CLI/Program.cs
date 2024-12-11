@@ -20,8 +20,8 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddTransient<IReadOnlyFileService, FileService>();
         services.AddTransient<IReadOnlyExchangeJsonRepository, ExchangeJsonRepository>();
         services.AddTransient<IExchangeAggregatorService, ExchangeAggregatorService>();
-        services.AddSingleton<IBuyService, BuyService>();
-        services.AddSingleton<ISellService, SellService>();
+        services.AddTransient<IBuyService, BuyService>();
+        services.AddTransient<ISellService, SellService>();
         services.AddSingleton<App>();
     })
     .Build();

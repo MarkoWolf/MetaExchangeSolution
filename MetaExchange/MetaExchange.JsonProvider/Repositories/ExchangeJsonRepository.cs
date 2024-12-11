@@ -1,14 +1,14 @@
 ﻿using MetaExchange.Core.Extensions;
 using MetaExchange.Core.Models;
-using MetaExchange.JsonProvider.Extentsions;
 using MetaExchange.JsonProvider.Interfaces;
+using MetaExchange.JsonProvider.Mappers;
 using MetaExchange.JsonProvider.Models;
 
 namespace MetaExchange.JsonProvider.Repositories;
 
 public class ExchangeJsonRepository(IReadOnlyFileService fileService) : IReadOnlyExchangeJsonRepository
 {
-    private readonly IReadOnlyFileService _fileService = fileService.NotNull();
+    private readonly IReadOnlyFileService _fileService = fileService.NotNull(nameof(fileService));
 
     public List<Exchange> GetAll()
     {
@@ -19,6 +19,6 @@ public class ExchangeJsonRepository(IReadOnlyFileService fileService) : IReadOnl
             return [];
         }
         
-        return jsonExchanges.Select(jsonExchange => jsonExchange.MapToDomain()).ToList();
+        return jsonExchanges.Select(jsonExchange => jsonExchange.Map()).ToList();
     }
 }

@@ -1,11 +1,11 @@
 ﻿using MetaExchange.Core.Models;
 using MetaExchange.JsonProvider.Models;
 
-namespace MetaExchange.JsonProvider.Extentsions;
+namespace MetaExchange.JsonProvider.Mappers;
 
 public static class JsonToDomainMapper
 {
-    public static Exchange MapToDomain(this JsonExchange jsonExchange)
+    public static Exchange Map(this JsonExchange jsonExchange)
     {
         if (jsonExchange == null)
             return new NullExchange();

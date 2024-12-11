@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaExchange.Dependencies",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaExchange.Core.Tests", "MetaExchange.Core.Tests\MetaExchange.Core.Tests.csproj", "{FE2D671E-A471-4BAF-AD0F-6315B9D3A3E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaExchange.Application", "MetaExchange.Application\MetaExchange.Application.csproj", "{4A2A1F79-023D-4F69-A3BE-ACAFF2538177}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{FE2D671E-A471-4BAF-AD0F-6315B9D3A3E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE2D671E-A471-4BAF-AD0F-6315B9D3A3E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE2D671E-A471-4BAF-AD0F-6315B9D3A3E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A2A1F79-023D-4F69-A3BE-ACAFF2538177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A2A1F79-023D-4F69-A3BE-ACAFF2538177}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A2A1F79-023D-4F69-A3BE-ACAFF2538177}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A2A1F79-023D-4F69-A3BE-ACAFF2538177}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

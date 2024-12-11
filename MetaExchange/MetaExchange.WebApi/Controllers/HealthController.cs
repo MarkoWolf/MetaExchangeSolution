@@ -43,7 +43,7 @@ public class HealthController : ControllerBase
         using (var process = Process.GetCurrentProcess())
         {
             var uptime = DateTime.UtcNow - process.StartTime.ToUniversalTime();
-            return uptime.ToString("c"); // c = Standardformat für Zeitspanne
+            return uptime.ToString("c");
         }
     }
 }

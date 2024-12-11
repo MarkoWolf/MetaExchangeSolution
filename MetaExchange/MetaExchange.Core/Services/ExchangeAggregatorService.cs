@@ -1,5 +1,5 @@
-﻿using MetaExchange.Core.Extensions;
-using MetaExchange.Core.Interfaces;
+﻿using MetaExchange.Core.Interfaces;
+using MetaExchange.Core.Mappers;
 using MetaExchange.Core.Models;
 
 namespace MetaExchange.Core.Services;
@@ -89,7 +89,7 @@ public class ExchangeAggregatorService : IExchangeAggregatorService
             .Select(ask => new AggregatedExchangeOrder
             {
                 ExchangeId = exchangeId,
-                Order = ask.Order.MapOrderToAggregatedOrder()
+                Order = ask.Order.Map()
             })
             .ToList();
     }
