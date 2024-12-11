@@ -1,20 +1,45 @@
 using MetaExchange.WebApi.Extensions;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+        .Build()) // Lies Konfiguration aus appsettings.json
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-builder.ConfigureServices();
+Log.Information("Starting up the application...");
 
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+try
 {
-    app.UseSwaggerWithUI();
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.ConfigureServices();
+
+    builder.Host.UseSerilog();
+
+    var app = builder.Build();
+
+    app.ConfigureExceptionHandler();
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwaggerWithUI();
+    }
+
+    app.ConfigureCustomMiddleware();
+
+    app.MapControllers();
+
+    await app.RunAsync();
 }
-
-app.ConfigureCustomMiddleware();
-
-app.MapControllers(); 
-
-app.Run();
-
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application start-up failed");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
 

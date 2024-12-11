@@ -29,12 +29,12 @@ public class ExchangeAggregatorService : IExchangeAggregatorService
     }
     private bool IsValidForAsksAggregation(Exchange exchange)
     {
-        return exchange.OrderBook.Asks.Any() &&
+        return exchange.OrderBook.Asks.Count != 0 &&
                exchange.AvailableFunds is { Crypto: > 0 };
     }
     private bool IsValidForBitsAggregation(Exchange exchange)
     {
-        return exchange.OrderBook.Bids.Any() &&
+        return exchange.OrderBook.Bids.Count != 0 &&
                exchange.AvailableFunds is { Euro: > 0 };
     }
 

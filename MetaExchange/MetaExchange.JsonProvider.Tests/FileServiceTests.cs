@@ -1,10 +1,13 @@
 ﻿using FluentAssertions;
 using MetaExchange.JsonProvider.Configurations;
 using MetaExchange.JsonProvider.Models;
+using MetaExchange.JsonProvider.Repositories;
 using MetaExchange.JsonProvider.Services;
 using MetaExchange.JsonProvider.Tests.TestModels;
 using MetaExchange.JsonProvider.Tests.TestUtlilites;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NSubstitute;
 
 namespace MetaExchange.JsonProvider.Tests;
 
@@ -15,7 +18,8 @@ public class FileServiceTests
     {
         // Arrange
         var options = Options.Create(new JsonProviderOptions { FilePath = "" });
-        var fileService = new FileService(options);
+        var logger = Substitute.For<ILogger<FileService>>();
+        var fileService = new FileService(options, logger);
 
         // Act
         var result = fileService.ReadAllFromFolder<object>();
@@ -29,7 +33,8 @@ public class FileServiceTests
     {
         // Arrange
         var options = Options.Create(new JsonProviderOptions { FilePath = "NonExistingFolder" });
-        var fileService = new FileService(options);
+        var logger = Substitute.For<ILogger<FileService>>();
+        var fileService = new FileService(options, logger);
 
         // Act
         var result = fileService.ReadAllFromFolder<object>();
@@ -44,7 +49,8 @@ public class FileServiceTests
         // Arrange
         using var tempFolder = TestHelper.CreateTemporaryFolder();
         var options = Options.Create(new JsonProviderOptions { FilePath = tempFolder.FolderPath });
-        var fileService = new FileService(options);
+        var logger = Substitute.For<ILogger<FileService>>();
+        var fileService = new FileService(options, logger);
 
         // Act
         var result = fileService.ReadAllFromFolder<object>();
@@ -59,7 +65,8 @@ public class FileServiceTests
         // Arrange
         using var tempFolder = TestHelper.CreateTemporaryFolder();
         var options = Options.Create(new JsonProviderOptions { FilePath = tempFolder.FolderPath });
-        var fileService = new FileService(options);
+        var logger = Substitute.For<ILogger<FileService>>();
+        var fileService = new FileService(options, logger);
 
         TestHelper.ExtractEmbeddedResource("MetaExchange.JsonProvider.Tests.Resources.exchange-01.json",
             Path.Combine(tempFolder.FolderPath, "exchange-01.json"));
@@ -82,7 +89,8 @@ public class FileServiceTests
         // Arrange
         using var tempFolder = TestHelper.CreateTemporaryFolder();
         var options = Options.Create(new JsonProviderOptions { FilePath = tempFolder.FolderPath });
-        var fileService = new FileService(options);
+        var logger = Substitute.For<ILogger<FileService>>();
+        var fileService = new FileService(options, logger);
 
         TestHelper.CreateJsonFile(tempFolder.FolderPath, "invalidExchange.json", "{\"Id\": \"exchange-01\"}");
 

@@ -1,6 +1,7 @@
 ﻿using MetaExchange.Core.Extensions;
 using MetaExchange.JsonProvider.Configurations;
 using MetaExchange.JsonProvider.Interfaces;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -9,23 +10,27 @@ using Newtonsoft.Json.Schema.Generation;
 
 namespace MetaExchange.JsonProvider.Services;
 
-public class FileService(IOptions<JsonProviderOptions> options) : IReadOnlyFileService
+public class FileService(IOptions<JsonProviderOptions> options, ILogger<FileService> logger) : IReadOnlyFileService
 {
+    private readonly ILogger<FileService> _logger = logger.NotNull(nameof(logger));
     private readonly JsonProviderOptions _options = options.NotNull(nameof(options)).Value;
     private readonly string _searchPattern = "*.json";
 
     public List<T> ReadAllFromFolder<T>()
     {
-        var folderPath =  Path.Combine(AppContext.BaseDirectory, _options.FilePath);
-        if (string.IsNullOrWhiteSpace(folderPath))
+        if (string.IsNullOrWhiteSpace(_options.FilePath))
         {
+            _logger.LogError("The folder path is empty.");
             return [];
         }
-
+        
+        var folderPath =  Path.Combine(AppContext.BaseDirectory, _options.FilePath);
+        
         var files = GetJsonFiles(folderPath);
         
         if (!files.Any())
         {
+            _logger.LogError("No files found in folder {folderPath}.", folderPath);
             return [];
         }
 
@@ -36,6 +41,7 @@ public class FileService(IOptions<JsonProviderOptions> options) : IReadOnlyFileS
     {
         if (!Directory.Exists(folderPath))
         {
+            _logger.LogError("The folder path {folderPath} does not exist.", folderPath);
             return [];
         }
 
@@ -50,14 +56,16 @@ public class FileService(IOptions<JsonProviderOptions> options) : IReadOnlyFileS
 
             if (!IsJsonValid<T>(jsonContent))
             {
+                _logger.LogError("The file {filePath} is not a valid json file.", filePath);
                 return [];
             }
 
             var deserializedObject = JsonConvert.DeserializeObject<T>(jsonContent);
             return deserializedObject != null ? new List<T> { deserializedObject } : new List<T> { };
         }
-        catch
+        catch(Exception ex)
         {
+            _logger.LogError(ex, "The file {filePath} is not valid.", filePath);
             return [];
         }
     }

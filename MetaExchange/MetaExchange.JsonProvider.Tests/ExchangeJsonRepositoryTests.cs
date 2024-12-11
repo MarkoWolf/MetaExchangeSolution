@@ -1,6 +1,8 @@
-﻿using MetaExchange.JsonProvider.Interfaces;
+﻿using Castle.Core.Logging;
+using MetaExchange.JsonProvider.Interfaces;
 using MetaExchange.JsonProvider.Models;
 using MetaExchange.JsonProvider.Repositories;
+using Microsoft.Extensions.Logging;
 using NSubstitute;
 
 namespace MetaExchange.JsonProvider.Tests;
@@ -12,7 +14,8 @@ public class ExchangeJsonRepositoryTests
     {
         // Arrange
         var fileService = Substitute.For<IReadOnlyFileService>();
-        var repository = new ExchangeJsonRepository(fileService);
+        var logger = Substitute.For<ILogger<ExchangeJsonRepository>>();
+        var repository = new ExchangeJsonRepository(fileService, logger);
 
         var mockJsonExchanges = new List<JsonExchange>
         {
@@ -37,7 +40,8 @@ public class ExchangeJsonRepositoryTests
     {
         // Arrange
         var fileService = Substitute.For<IReadOnlyFileService>();
-        var repository = new ExchangeJsonRepository(fileService);
+        var logger = Substitute.For<ILogger<ExchangeJsonRepository>>();
+        var repository = new ExchangeJsonRepository(fileService, logger);
 
         fileService.ReadAllFromFolder<JsonExchange>().Returns(new List<JsonExchange>());
 
@@ -54,7 +58,8 @@ public class ExchangeJsonRepositoryTests
     {
         // Arrange
         var fileService = Substitute.For<IReadOnlyFileService>();
-        var repository = new ExchangeJsonRepository(fileService);
+        var logger = Substitute.For<ILogger<ExchangeJsonRepository>>();
+        var repository = new ExchangeJsonRepository(fileService, logger);
 
         fileService.ReadAllFromFolder<JsonExchange>().Returns((List<JsonExchange>?)null);
 
