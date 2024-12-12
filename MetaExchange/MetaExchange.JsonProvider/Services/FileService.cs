@@ -4,9 +4,6 @@ using MetaExchange.JsonProvider.Interfaces;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
 
 namespace MetaExchange.JsonProvider.Services;
 
@@ -54,12 +51,6 @@ public class FileService(IOptions<JsonProviderOptions> options, ILogger<FileServ
         {
             var jsonContent = File.ReadAllText(filePath);
 
-            if (!IsJsonValid<T>(jsonContent))
-            {
-                _logger.LogError("The file {filePath} is not a valid json file.", filePath);
-                return [];
-            }
-
             var deserializedObject = JsonConvert.DeserializeObject<T>(jsonContent);
             return deserializedObject != null ? new List<T> { deserializedObject } : new List<T> { };
         }
@@ -68,14 +59,5 @@ public class FileService(IOptions<JsonProviderOptions> options, ILogger<FileServ
             _logger.LogError(ex, "The file {filePath} is not valid.", filePath);
             return [];
         }
-    }
-
-    private bool IsJsonValid<T>(string jsonContent)
-    {
-        var generator = new JSchemaGenerator();
-        var schema = generator.Generate(typeof(T));
-
-        var jsonObject = JObject.Parse(jsonContent);
-        return jsonObject.IsValid(schema, out IList<string> _);
     }
 }
