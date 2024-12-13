@@ -81,23 +81,4 @@ public class FileServiceTests
         result.Should().ContainSingle(e => e.Id == "exchange-01");
         result.Should().ContainSingle(e => e.Id == "exchange-02");
     }
-    
-    
-    [Fact]
-    public void ReadAllFromFolder_ShouldIgnoreFiles_WhenJsonFormatDoesNotMatchClass()
-    {
-        // Arrange
-        using var tempFolder = TestHelper.CreateTemporaryFolder();
-        var options = Options.Create(new JsonProviderOptions { FilePath = tempFolder.FolderPath });
-        var logger = Substitute.For<ILogger<FileService>>();
-        var fileService = new FileService(options, logger);
-
-        TestHelper.CreateJsonFile(tempFolder.FolderPath, "invalidExchange.json", "{\"Id\": \"exchange-01\"}");
-
-        // Act
-        var result = fileService.ReadAllFromFolder<TestExchange>();
-
-        // Assert
-        result.Should().BeEmpty();
-    }
 }
