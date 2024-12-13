@@ -21,32 +21,32 @@ services:
       - LOG_DIR=/app/logs
       # I am aware that hardcoding CONNECTION_STRING is a security risk.
       # For example, you could use environment variables loaded from a secure .env file.
-      - CONNECTION_STRING=Host=postgres;Port=5432;Database=MetaExchangeDb;Username=postgres;Password=VerySecurePW
+      #- CONNECTION_STRING=Host=postgres;Port=5432;Database=MetaExchangeDb;Username=postgres;Password=VerySecurePW
     volumes:
       - C:/Temp/MetaExchangeLogs:/app/logs
-    depends_on:
-      - postgres
-
-  postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: postgres
-      # I am aware that hardcoding POSTGRES_PASSWORD is a security risk.
-      # For example, you could store it in a .env file or use a secret management tool.
-      POSTGRES_PASSWORD: VerySecurePW
-      POSTGRES_DB: MetaExchangeDb
-      
-    # Volume is commented out because persistence is not needed for this demo. Data will reset on each container restart.
-    # volumes: 
-      # - postgres_data:/var/lib/postgresql/data
-   
-    deploy:
-      resources:
-        limits:
-          cpus: "1.0"    # Limit to one CPU core
-          memory: 200M # Limit to 200MB of memory
-        reservations:
-          cpus: "1.0"
-          memory: 200M
-volumes:
-  postgres_data:
+        #depends_on:
+        #- postgres
+        
+        #postgres:
+        # image: postgres:latest
+        # environment:
+        #  POSTGRES_USER: postgres
+        # I am aware that hardcoding POSTGRES_PASSWORD is a security risk.
+        # For example, you could store it in a .env file or use a secret management tool.
+        # POSTGRES_PASSWORD: VerySecurePW
+        # POSTGRES_DB: MetaExchangeDb
+        
+        # Volume is commented out because persistence is not needed for this demo. Data will reset on each container restart.
+        # volumes: 
+        # - postgres_data:/var/lib/postgresql/data
+        
+        # deploy:
+        # resources:
+        #   limits:
+        #    cpus: "1.0"    # Limit to one CPU core
+        #    memory: 200M # Limit to 200MB of memory
+        # reservations:
+        #   cpus: "1.0"
+      #   memory: 200M
+  #volumes:
+  # postgres_data:
