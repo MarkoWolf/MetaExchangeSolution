@@ -3,5 +3,5 @@
 public class AggregatedExchangeOrder
 {
     public string ExchangeId { get; set; } = String.Empty;
-    public AggregatedOrder Order { get; set; } = new AggregatedOrder();
+    public AggregatedOrder Order { get; set; } = new();
 }

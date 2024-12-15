@@ -15,7 +15,7 @@ public class OrderHandler(IBuyService buyService, ISellService sellService, ILog
 
     public List<OrderExecutionResult> ProcessOrder(OrderType orderType, decimal amount, List<Exchange> exchanges)
     {
-        if (exchanges == null || exchanges.Count == 0)
+        if (exchanges is null || exchanges.Count == 0)
         {
             _logger.LogWarning("No exchanges available to process the order of type {orderType} for amount {amount}.", orderType, amount);
             return [];
@@ -37,7 +37,7 @@ public class OrderHandler(IBuyService buyService, ISellService sellService, ILog
 
     public List<Exchange> ExecuteOrders(OrderType orderType, List<OrderExecutionResult> results, List<Exchange> exchanges)
     {
-        if (results == null || results.Count == 0)
+        if (results is null || results.Count == 0)
         {
             _logger.LogWarning("No execution results available for order type {orderType}. Available exchanges: {count}.", orderType, exchanges?.Count ?? 0);
             return [];

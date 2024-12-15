@@ -8,8 +8,8 @@ public static class OrderMapper
     {
         return new AggregatedOrder
         {
-            Id = order.Id, 
-            Amount = order.Amount, 
+            Id = order.Id,
+            Amount = order.Amount,
             Price = order.Price
         };
     }
