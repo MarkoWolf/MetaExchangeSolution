@@ -2,6 +2,6 @@
 
 public class AggregatedExchangeOrder
 {
-    public string ExchangeId { get; set; }
-    public AggregatedOrder Order { get; set; }
+    public string ExchangeId { get; set; } = String.Empty;
+    public AggregatedOrder Order { get; set; } = new AggregatedOrder();
 }

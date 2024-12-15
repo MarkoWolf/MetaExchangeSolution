@@ -105,10 +105,11 @@ public class JsonToDomainMapperTests
     public void MapToDomain_ShouldNull_WhenJsonExchangeIsNull()
     {
         // Arrange
-        JsonExchange jsonExchange = null;
+        JsonExchange? jsonExchange = null;
 
         // Act
-        Exchange result = jsonExchange.Map();
+        // ! because of testing purpes 
+        Exchange result = jsonExchange!.Map();
 
         // Assert
         result.Should().NotBeNull();

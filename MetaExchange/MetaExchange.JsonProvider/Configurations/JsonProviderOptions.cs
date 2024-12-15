@@ -2,5 +2,5 @@
 
 public class JsonProviderOptions
 {
-    public string FilePath { get; set; }
+    public string FilePath { get; set; } = String.Empty;
 }

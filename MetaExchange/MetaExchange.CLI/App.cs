@@ -11,7 +11,7 @@ public class App(IReadOnlyExchangeJsonRepository exchangeJsonRepository, IUserIn
     private readonly IUserInteractionService _userInteractionService = userInteractionService.NotNull(nameof(userInteractionService));
     private readonly IReadOnlyExchangeJsonRepository _exchangeJsonRepository = exchangeJsonRepository.NotNull(nameof(exchangeJsonRepository));
 
-    public async Task RunAsync()
+    public void Run()
     {
         Console.WriteLine("Welcome to MetaExchange Command Line Interface!");
         var exchanges = _exchangeJsonRepository.GetAll();

@@ -11,7 +11,7 @@ public class UserInteractionService : IUserInteractionService
         while (true)
         {    
             Console.WriteLine("Enter order type (Buy/Sell):");
-            var input = Console.ReadLine();
+            string? input = Console.ReadLine();
             if (Enum.TryParse(input, true, out OrderType orderType))
             {
                 return orderType;
@@ -24,7 +24,7 @@ public class UserInteractionService : IUserInteractionService
         }
     }
 
-    private bool TryAgain(string input)
+    private bool TryAgain(string? input)
     {
         Console.WriteLine($"The input '{input}' is invalid. Would you like to try again? (yes/no)", input);
         return Console.ReadLine()?.Trim().ToLower() == "yes";
@@ -35,7 +35,7 @@ public class UserInteractionService : IUserInteractionService
         while (true)
         {
             Console.WriteLine("Enter the amount of BTC (must be greater than zero):");
-            var input = Console.ReadLine();
+            string? input = Console.ReadLine();
             if (decimal.TryParse(input, out var amount) && amount > 0)
             {
                 return amount;

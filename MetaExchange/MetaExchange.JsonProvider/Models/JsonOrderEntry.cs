@@ -2,5 +2,5 @@
 
 public class JsonOrderEntry 
 {
-    public JsonOrder Order { get; set; }
+    public JsonOrder Order { get; set; } = new JsonOrder();
 }

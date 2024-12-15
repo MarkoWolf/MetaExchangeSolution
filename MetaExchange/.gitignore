@@ -1,0 +1,26 @@
+!.gitignore
+
+
+# Build results
+bin/
+obj/
+
+# Rider settings
+.idea/
+
+# Visual Studio settings
+.vs/
+*.user
+*.suo
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+
+# Logs
+*.log
+
+# Other
+Thumbs.db
+

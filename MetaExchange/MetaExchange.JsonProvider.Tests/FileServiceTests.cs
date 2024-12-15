@@ -1,9 +1,7 @@
 ﻿using FluentAssertions;
 using MetaExchange.JsonProvider.Configurations;
 using MetaExchange.JsonProvider.Models;
-using MetaExchange.JsonProvider.Repositories;
 using MetaExchange.JsonProvider.Services;
-using MetaExchange.JsonProvider.Tests.TestModels;
 using MetaExchange.JsonProvider.Tests.TestUtlilites;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;

@@ -17,17 +17,6 @@ Ensure the `docker-compose.yml` contains the correct volume mapping for logs:
 volumes:
   - C:/Temp/MetaExchangeLogs:/app/logs
 
-Additionally, note:
-
-Only HTTP is enabled for demo purposes.
-The database (PostgreSQL) is non-persistent for demo purposes. All data will be reset on container restart.
-
-## 2. Security Warnings
-This demo configuration includes hardcoded sensitive data:
-
-CONNECTION_STRING in docker-compose.yml: Hardcoding credentials (e.g., passwords) is a security risk. Use secure methods, such as environment files (.env), for real environments.
-POSTGRES_PASSWORD: Similarly, the database password is hardcoded. In production, you should store sensitive data securely using secret management tools.
-
 ### 3. Build and Run the Container
 Navigate to the directory containing the `docker-compose.yml` file and run the following commands:
 
@@ -61,6 +50,5 @@ http://localhost:4523/api/OrderBook/executionplans/sell?amount=1.5
 ## Additional Notes
 1. **Environment Switching**: Use the `ASPNETCORE_ENVIRONMENT` variable in `docker-compose.yml` to toggle between `Development` and `Production` environments.
 2. **Ports**: The application listens on HTTP port `4523` by default. Adjust the `ports` section in `docker-compose.yml` if needed.
-3. **Database**: The container includes PostgreSQL for data storage. Ensure the database is properly initialized if needed.
 
 

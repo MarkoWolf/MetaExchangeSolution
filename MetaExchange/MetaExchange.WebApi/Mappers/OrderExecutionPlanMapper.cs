@@ -5,9 +5,9 @@ namespace MetaExchange.WebApi.Mappers;
 
 public static class OrderExecutionPlanMapper
 {
-    public static ExecutionPlanReponse Map(this OrderExecutionPlan result)
+    public static ExecutionPlanResponse Map(this OrderExecutionPlan result)
     {
-        return new ExecutionPlanReponse
+        return new ExecutionPlanResponse
         {
             ExchangeId = result.ExchangeId,
             TotalPrice = result.TotalPrice,
@@ -21,7 +21,7 @@ public static class OrderExecutionPlanMapper
         };
     }
     
-    public static List<ExecutionPlanReponse> Map(this List<OrderExecutionPlan> results)
+    public static List<ExecutionPlanResponse> Map(this List<OrderExecutionPlan> results)
     {
         return results.Select(result => result.Map()).ToList();
     }

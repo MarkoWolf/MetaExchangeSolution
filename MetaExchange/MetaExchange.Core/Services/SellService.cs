@@ -29,7 +29,7 @@ public class SellService(IExchangeAggregatorService bitsExchangeAggregatorServic
             Exchange? exchange = exchanges.FirstOrDefault(exchange => exchange.Id == orderExecution.ExchangeId);
             if (exchange == null)
             {
-                return [];
+                return new List<Exchange>();
             }
 
             foreach (ExecutedOrder order in orderExecution.Orders)
@@ -37,9 +37,13 @@ public class SellService(IExchangeAggregatorService bitsExchangeAggregatorServic
                 OrderEntry? bid = exchange.OrderBook.Bids.FirstOrDefault(bid => bid.Order.Id == order.OrderId);
                 if (!IsOrderValid(bid, order, exchange))
                 {
-                    return []; 
+                    return new List<Exchange>(); 
                 }
-                bid.Order.Amount -= order.Amount;
+
+                if (bid is not null)
+                {
+                    bid.Order.Amount -= order.Amount;
+                }
                 exchange.AvailableFunds.Crypto += order.Amount;
                 exchange.AvailableFunds.Euro -= order.TotalPrice;
             }

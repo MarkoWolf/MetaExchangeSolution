@@ -1,8 +1,8 @@
 ﻿namespace MetaExchange.WebApi.Contracts.Responses;
 
-public class ExecutionPlanReponse
+public class ExecutionPlanResponse
 {
-    public string ExchangeId { get; set; } 
+    public string ExchangeId { get; set; } = string.Empty;
     
     public List<PlanOrderResponse> Orders { get; set; } = new(); 
     
