@@ -17,7 +17,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 
 # Copy the published output from build-env
-#COPY --from=build-env /app/MetaExchange/MetaExchange.WebApi/out ./
 COPY --from=build-env /app/out .
 
 # Create a directory for logs

@@ -1,25 +1,23 @@
 using MetaExchange.WebApi.Extensions;
-using Serilog;
-
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(new ConfigurationBuilder()
-        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-        .Build()) // Lies Konfiguration aus appsettings.json
-    .Enrich.FromLogContext()
-    .WriteTo.Console()
-    .CreateBootstrapLogger();
-
-Log.Information("Starting up the application...");
 
 try
 {
     var builder = WebApplication.CreateBuilder(args);
 
+    builder.Logging.ClearProviders();
+    builder.Logging.AddConsole();
     builder.ConfigureServices();
 
-    builder.Host.UseSerilog();
-
     var app = builder.Build();
+
+    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+
+    logger.LogInformation("Starting up the application...");
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwaggerWithUI();
+    }
 
     if (app.Environment.IsDevelopment())
     {
@@ -34,10 +32,7 @@ try
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, "Application start-up failed");
+    using var loggerFactory = LoggerFactory.Create(loggingBuilder => { loggingBuilder.AddConsole(); });
+    var logger = loggerFactory.CreateLogger<Program>();
+    logger.LogCritical(ex, "Application start-up failed");
 }
-finally
-{
-    Log.CloseAndFlush();
-}
-

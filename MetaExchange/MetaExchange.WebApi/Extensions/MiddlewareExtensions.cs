@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
-
-namespace MetaExchange.WebApi.Extensions;
+﻿namespace MetaExchange.WebApi.Extensions;
 
 public static class MiddlewareExtensions
 {
@@ -17,6 +15,7 @@ public static class MiddlewareExtensions
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "MetaExchange API v1");
             c.RoutePrefix = string.Empty;
+            c.DisplayRequestDuration(); 
         });
     }
 }

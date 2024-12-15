@@ -12,16 +12,8 @@ services:
     build:
       context: ../
       dockerfile: /MetaExchange.WebApi/Dockerfile
-      args:
-        LOG_DIR: /app/logs
     ports:
       - "4523:80"      # HTTP
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - LOG_DIR=/app/logs
-      # I am aware that hardcoding CONNECTION_STRING is a security risk.
-      # For example, you could use environment variables loaded from a secure .env file.
-      #- CONNECTION_STRING=Host=postgres;Port=5432;Database=MetaExchangeDb;Username=postgres;Password=VerySecurePW
-    volumes:
-      - C:/Temp/MetaExchangeLogs:/app/logs
       

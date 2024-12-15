@@ -10,18 +10,18 @@ using MetaExchange.JsonProvider.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Serilog;
+using Microsoft.Extensions.Logging;
 
-Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .ReadFrom.Configuration(new ConfigurationBuilder()
-        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-        .Build())
-    .CreateBootstrapLogger();
+// Log.Logger = new LoggerConfiguration()
+//     .WriteTo.Console()
+//     .ReadFrom.Configuration(new ConfigurationBuilder()
+//         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+//         .Build())
+//     .CreateBootstrapLogger();
 
 try
 {
-    Log.Information("Starting MetaExchange CLI application...");
+    //Log.Information("Starting MetaExchange CLI application...");
     var host = Host.CreateDefaultBuilder(args)
         .ConfigureAppConfiguration((context, config) => { config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true); })
         .ConfigureServices((context, services) =>
@@ -35,18 +35,28 @@ try
             services.AddTransient<IUserInteractionService, UserInteractionService>();
             services.AddTransient<IOrderHandler, OrderHandler>();
             services.AddSingleton<App>();
+        }) .ConfigureLogging((context, logging) =>
+        {
+            logging.ClearProviders();             
+            logging.AddConsole();                 
+            logging.AddDebug();                   
+            logging.AddConfiguration(context.Configuration.GetSection("Logging")); 
         })
         .Build();
-
+    
+    var logger = host.Services.GetRequiredService<ILogger<Program>>();
+    logger.LogInformation("Starting MetaExchange CLI application...");
+    
     using var scope = host.Services.CreateScope();
     var app = scope.ServiceProvider.GetRequiredService<App>(); 
     app.Run();
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, "An unexpected error occurred while starting the application.");
-}
-finally
-{
-    Log.CloseAndFlush();
+    using var loggerFactory = LoggerFactory.Create(logging =>
+    {
+        logging.AddConsole(); 
+    });
+    var logger = loggerFactory.CreateLogger<Program>();
+    logger.LogCritical(ex, "An unexpected error occurred while starting the application.");
 }
