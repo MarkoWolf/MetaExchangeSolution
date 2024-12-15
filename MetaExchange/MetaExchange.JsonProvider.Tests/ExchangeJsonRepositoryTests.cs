@@ -1,5 +1,4 @@
-﻿using Castle.Core.Logging;
-using MetaExchange.JsonProvider.Interfaces;
+﻿using MetaExchange.JsonProvider.Interfaces;
 using MetaExchange.JsonProvider.Models;
 using MetaExchange.JsonProvider.Repositories;
 using Microsoft.Extensions.Logging;

@@ -3,7 +3,6 @@ using MetaExchange.Core.Models;
 using MetaExchange.Core.Services;
 using MetaExchange.Core.Tests.TestData;
 
-
 namespace MetaExchange.Core.Tests;
 
 public class BuyServiceTests

@@ -12,16 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-// Log.Logger = new LoggerConfiguration()
-//     .WriteTo.Console()
-//     .ReadFrom.Configuration(new ConfigurationBuilder()
-//         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-//         .Build())
-//     .CreateBootstrapLogger();
-
 try
 {
-    //Log.Information("Starting MetaExchange CLI application...");
     var host = Host.CreateDefaultBuilder(args)
         .ConfigureAppConfiguration((context, config) => { config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true); })
         .ConfigureServices((context, services) =>

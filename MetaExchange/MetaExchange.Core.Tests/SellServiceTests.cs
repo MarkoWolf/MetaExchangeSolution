@@ -2,10 +2,6 @@
 using MetaExchange.Core.Models;
 using MetaExchange.Core.Services;
 using MetaExchange.Core.Tests.TestData;
-using MetaExchange.JsonProvider.Configurations;
-using MetaExchange.JsonProvider.Repositories;
-using MetaExchange.JsonProvider.Services;
-using Microsoft.Extensions.Options;
 
 namespace MetaExchange.Core.Tests;
 
