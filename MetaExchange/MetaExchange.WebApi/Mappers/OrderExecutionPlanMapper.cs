@@ -5,7 +5,7 @@ namespace MetaExchange.WebApi.Mappers;
 
 public static class OrderExecutionPlanMapper
 {
-    public static ExecutionPlanResponse Map(this OrderExecutionPlan result)
+    private static ExecutionPlanResponse Map(this OrderExecutionPlan result)
     {
         return new ExecutionPlanResponse
         {

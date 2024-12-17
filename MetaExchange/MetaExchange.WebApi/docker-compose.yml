@@ -1,4 +1,3 @@
-version: '3.9'
 services:
   webapi:
     deploy:
@@ -11,7 +10,7 @@ services:
           memory: 200M
     build:
       context: ../
-      dockerfile: /MetaExchange.WebApi/Dockerfile
+      dockerfile: MetaExchange.WebApi/Dockerfile
     ports:
       - "4523:80"      # HTTP
     environment:
