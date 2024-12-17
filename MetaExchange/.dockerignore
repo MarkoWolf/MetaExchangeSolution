@@ -1,0 +1,21 @@
+# Ignore bin and obj folders
+**/bin/
+**/obj/
+**/out/
+
+# Ignore user-specific files
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+
+# Ignore Visual Studio temporary files and logs
+.vs/
+*.log
+
+# Ignore Docker-related files
+Dockerfile*
+docker-compose.*
+
+# ReadMe
+**/*.md
